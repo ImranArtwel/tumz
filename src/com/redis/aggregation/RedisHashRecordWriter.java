@@ -48,7 +48,7 @@ public class RedisHashRecordWriter extends RecordWriter<Text, Text> {
 	public RedisHashRecordWriter(String hashKey, String hosts) {
 	this.hashKey = hashKey;
 	csvHosts = hosts;
-	LOG.info("the hash key value is "+ hashKey);
+	//LOG.info("the hash key value is "+ hashKey);
 
 	// Create a connection to Redis for each host
 	// Map an integer 0-(numRedisInstances - 1) to the instance
@@ -57,6 +57,7 @@ public class RedisHashRecordWriter extends RecordWriter<Text, Text> {
 	Jedis jedis = new Jedis(host);
 	jedis.connect();
 	LOG.info(host + " connected successfully");
+	
 	jedisMap.put(i++, jedis);
 	}
 	}
@@ -65,7 +66,7 @@ public class RedisHashRecordWriter extends RecordWriter<Text, Text> {
 	public void write(Text key, Text value) throws IOException, InterruptedException {
 	// Get the Jedis instance that this key/value pair will be written to.
 	Jedis j = jedisMap.get(Math.abs(key.hashCode()) % jedisMap.size());
-	LOG.info("savind data to "+j);
+	//LOG.info("savind data to "+j);
 	int total;
      //get the map
 	 map = getMap();

@@ -8,6 +8,7 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
@@ -53,7 +54,7 @@ public class JedisJava {
 		job.setNumReduceTasks(0);
 
 		job.setInputFormatClass(TextInputFormat.class);
-		TextInputFormat.setInputPaths(job, inputPath);
+		FileInputFormat.setInputPaths(job, inputPath);
 
 		job.setOutputFormatClass(RedisHashOutputFormat.class);
 		RedisHashOutputFormat.setRedisHosts(job, hosts);
